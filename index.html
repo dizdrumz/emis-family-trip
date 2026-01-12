@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emi's Family Trip #2 - Guadalajara 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 30px 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Budget Summary */
+        .budget-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .budget-item {
+            text-align: center;
+        }
+
+        .budget-item label {
+            display: block;
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .budget-item .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3c72;
+        }
+
+        .budget-total {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 15px 25px;
+            border-radius: 10px;
+        }
+
+        .budget-total label {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        .budget-total .value {
+            color: white !important;
+            font-size: 2rem;
+        }
+
+        /* Days Container */
+        .days-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Day Card */
+        .day-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .day-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .day-card.dragging {
+            opacity: 0.5;
+            transform: scale(1.02);
+        }
+
+        .day-header {
+            background: linear-gradient(90deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: grab;
+        }
+
+        .day-header:active {
+            cursor: grabbing;
+        }
+
+        .day-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .day-title input {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 8px;
+            width: 250px;
+        }
+
+        .day-title input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .day-date {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .day-cost {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .drag-handle {
+            cursor: grab;
+            opacity: 0.7;
+            font-size: 1.2rem;
+        }
+
+        /* Activities Table */
+        .activities-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .activities-table th {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            border-bottom: 2px solid #eee;
+        }
+
+        .activities-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        .activities-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .activities-table tr.dragging {
+            background: #e3f2fd;
+            opacity: 0.7;
+        }
+
+        .activity-row {
+            cursor: grab;
+        }
+
+        .activity-row:active {
+            cursor: grabbing;
+        }
+
+        /* Editable inputs */
+        .editable-input {
+            border: 1px solid transparent;
+            background: transparent;
+            padding: 8px;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .editable-input:hover {
+            background: #f0f0f0;
+        }
+
+        .editable-input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .time-input {
+            width: 80px;
+            text-align: center;
+        }
+
+        .cost-input {
+            width: 100px;
+            text-align: right;
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        /* Action buttons */
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
+        .action-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .delete-btn:hover {
+            background: #ffebee;
+            color: #dc3545;
+        }
+
+        .add-btn {
+            background: #e8f5e9;
+            color: #28a745;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            margin: 15px;
+            transition: all 0.2s;
+        }
+
+        .add-btn:hover {
+            background: #c8e6c9;
+        }
+
+        /* Add Day Button */
+        .add-day-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .add-day-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: white;
+        }
+
+        /* Footer Actions */
+        .footer-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-btn {
+            background: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .save-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .print-btn {
+            background: #1e3c72;
+            color: white;
+        }
+
+        .reset-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #333;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            background: #28a745;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .budget-bar,
+            .day-card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            .add-btn,
+            .add-day-btn,
+            .footer-actions,
+            .action-btn,
+            .drag-handle {
+                display: none !important;
+            }
+
+            .editable-input {
+                border: none;
+                padding: 0;
+            }
+
+            .day-header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .budget-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .day-title input {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+        <header>
+            <h1>✨ Emi's Family Trip #2</h1>
+            <p>Guadalajara en Familia · Mayo 17-24, 2026</p>
+        </header>
+
+        <!-- Budget Summary Bar -->
+        <div class="budget-bar">
+            <div class="budget-item">
+                <label>Hospedaje</label>
+                <div class="value" id="budget-hospedaje">$0</div>
+            </div>
+            <div class="budget-item">
+                <label>Transporte</label>
+                <div class="value" id="budget-transporte">$0</div>
+            </div>
+            <div class="budget-item">
+                <label>Entradas</label>
+                <div class="value" id="budget-entradas">$0</div>
+            </div>
+            <div class="budget-item">
+                <label>Alimentación</label>
+                <div class="value" id="budget-alimentacion">$0</div>
+            </div>
+            <div class="budget-item budget-total">
+                <label>Total del Viaje</label>
+                <div class="value" id="budget-total">$0</div>
+            </div>
+        </div>
+
+        <!-- Days Container -->
+        <div class="days-container" id="days-container">
+            <!-- Days will be rendered here -->
+        </div>
+
+        <!-- Add Day Button -->
+        <button class="add-day-btn" onclick="addDay()">
+            ➕ Agregar Nuevo Día
+        </button>
+
+        <!-- Final Cost Summary Table -->
+        <div class="day-card" style="margin-top: 30px;">
+            <div class="day-header" style="background: linear-gradient(90deg, #28a745, #20c997);">
+                <div class="day-title">
+                    <span>💰</span>
+                    <span style="font-size: 1.1rem; font-weight: 600;">RESUMEN FINAL DE COSTOS</span>
+                </div>
+            </div>
+            <div style="padding: 20px;">
+                <table class="activities-table" id="summary-table">
+                    <thead>
+                        <tr>
+                            <th>Categoría</th>
+                            <th>Descripción</th>
+                            <th style="text-align: right;">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="summary-body">
+                        <!-- Filled by JavaScript -->
+                    </tbody>
+                    <tfoot>
+                        <tr style="background: linear-gradient(90deg, #28a745, #20c997); color: white;">
+                            <td colspan="2" style="font-weight: bold; font-size: 1.1rem;">TOTAL DEL VIAJE</td>
+                            <td style="text-align: right; font-weight: bold; font-size: 1.3rem;"
+                                id="summary-grand-total">$0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <h3 style="margin: 25px 0 15px 0; color: #1e3c72;">📊 Desglose por Día</h3>
+                <table class="activities-table" id="daily-breakdown">
+                    <thead>
+                        <tr>
+                            <th>Día</th>
+                            <th>Actividad Principal</th>
+                            <th style="text-align: right;">Costo del Día</th>
+                        </tr>
+                    </thead>
+                    <tbody id="daily-breakdown-body">
+                        <!-- Filled by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="footer-actions">
+            <button class="footer-btn save-btn" onclick="saveData()">
+                💾 Guardar Cambios
+            </button>
+            <button class="footer-btn print-btn" onclick="window.print()">
+                🖨️ Imprimir / PDF
+            </button>
+            <button class="footer-btn reset-btn" onclick="resetData()">
+                🔄 Reiniciar Todo
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Initial Data
+        const defaultData = {
+            days: [
+                {
+                    id: 1,
+                    date: "Domingo 17 Mayo",
+                    title: "🛬 Llegada",
+                    activities: [
+                        { id: 1, time: "21:00", activity: "Recoger auto en aeropuerto", details: "Mostrador de la agencia", cost: 0, category: "transporte", location: "https://maps.google.com/?q=Aeropuerto+Internacional+de+Guadalajara" },
+                        { id: 2, time: "21:30", activity: "Instalar silla de bebé", details: "-", cost: 0, category: "transporte", location: "" },
+                        { id: 3, time: "22:00", activity: "Traslado a hotel", details: "30 min desde aeropuerto", cost: 0, category: "transporte", location: "" },
+                        { id: 4, time: "22:30", activity: "Check-in hotel", details: "Hampton Inn Expo", cost: 1800, category: "hospedaje", location: "https://maps.google.com/?q=Hampton+Inn+Guadalajara+Expo" },
+                        { id: 5, time: "23:00", activity: "Cena ligera", details: "Uber Eats o OXXO", cost: 200, category: "alimentacion", location: "" }
+                    ]
+                },
+                {
+                    id: 2,
+                    date: "Lunes 18 Mayo",
+                    title: "🌊 Lago de Chapala + Ajijic",
+                    activities: [
+                        { id: 1, time: "08:00", activity: "Desayuno en hotel", details: "Buffet incluido", cost: 0, category: "alimentacion", location: "" },
+                        { id: 2, time: "09:30", activity: "Salida a Chapala", details: "Caseta $94", cost: 94, category: "transporte", location: "" },
+                        { id: 3, time: "10:30", activity: "Paseo Malecón Chapala", details: "Ver el lago, lanchas", cost: 0, category: "entradas", location: "https://maps.google.com/?q=Malecon+Chapala+Jalisco" },
+                        { id: 4, time: "12:00", activity: "SIESTA en auto → Ajijic", details: "15 min trayecto", cost: 0, category: "transporte", location: "" },
+                        { id: 5, time: "13:00", activity: "Comida en La Nueva Posada", details: "Restaurante con jardín", cost: 800, category: "alimentacion", location: "https://maps.google.com/?q=La+Nueva+Posada+Ajijic" },
+                        { id: 6, time: "15:00", activity: "Caminata por Ajijic", details: "Murales, helado", cost: 100, category: "alimentacion", location: "https://maps.google.com/?q=Malecon+Ajijic+Jalisco" },
+                        { id: 7, time: "17:00", activity: "Regreso a GDL", details: "Caseta $94", cost: 94, category: "transporte", location: "" },
+                        { id: 8, time: "20:00", activity: "Cena ligera", details: "-", cost: 400, category: "alimentacion", location: "" }
+                    ]
+                },
+                {
+                    id: 3,
+                    date: "Martes 19 Mayo",
+                    title: "🦁 Zoológico + Planetario",
+                    activities: [
+                        { id: 1, time: "08:00", activity: "Desayuno hotel", details: "Buffet incluido", cost: 0, category: "alimentacion", location: "" },
+                        { id: 2, time: "09:30", activity: "Zoológico Guadalajara", details: "Estacionamiento $60", cost: 60, category: "transporte", location: "https://maps.google.com/?q=Zoologico+Guadalajara" },
+                        { id: 3, time: "09:30", activity: "Boletos Paquete Premier", details: "2 Adultos + 1 Niño", cost: 1050, category: "entradas", location: "https://maps.google.com/?q=Zoologico+Guadalajara" },
+                        { id: 4, time: "12:00", activity: "SIESTA en área picnic", details: "Cobija bajo árboles", cost: 0, category: "alimentacion", location: "" },
+                        { id: 5, time: "13:00", activity: "Lunch en el Zoo", details: "Zona de comida", cost: 400, category: "alimentacion", location: "" },
+                        { id: 6, time: "16:30", activity: "Planetario Lunaria", details: "2 Adultos + 1 Niño", cost: 180, category: "entradas", location: "https://maps.google.com/?q=Planetario+Lunaria+Guadalajara" },
+                        { id: 7, time: "20:00", activity: "Cena zona Providencia", details: "-", cost: 600, category: "alimentacion", location: "" }
+                    ]
+                },
+                {
+                    id: 4,
+                    date: "Miércoles 20 Mayo",
+                    title: "🎨 JAPI + Bosque Colomos",
+                    activities: [
+                        { id: 1, time: "09:00", activity: "Desayuno", details: "-", cost: 0, category: "alimentacion", location: "" },
+                        { id: 2, time: "10:00", activity: "JAPI Paseo Interactivo", details: "Estacionamiento", cost: 80, category: "transporte", location: "https://maps.google.com/?q=JAPI+Jalisco+Paseo+Interactivo" },
+                        { id: 3, time: "10:00", activity: "Entrada JAPI", details: "2 Adultos (Emilia gratis)", cost: 300, category: "entradas", location: "https://maps.google.com/?q=JAPI+Jalisco+Paseo+Interactivo" },
+                        { id: 4, time: "12:00", activity: "SIESTA", details: "En auto o hotel", cost: 0, category: "alimentacion", location: "" },
+                        { id: 5, time: "13:30", activity: "Comida La Tequila", details: "Chapalita", cost: 900, category: "alimentacion", location: "https://maps.google.com/?q=La+Tequila+Chapalita+Guadalajara" },
+                        { id: 6, time: "15:30", activity: "Bosque Los Colomos", details: "Entrada gratis", cost: 0, category: "entradas", location: "https://maps.google.com/?q=Bosque+Los+Colomos+Guadalajara" },
+                        { id: 7, time: "20:00", activity: "Cena", details: "-", cost: 400, category: "alimentacion", location: "" }
+                    ]
+                },
+                {
+                    id: 5,
+                    date: "Jueves 21 Mayo",
+                    title: "🐠 Acuario Michin + Tonalá",
+                    activities: [
+                        { id: 1, time: "08:00", activity: "Desayuno temprano", details: "-", cost: 200, category: "alimentacion", location: "" },
+                        { id: 2, time: "09:00", activity: "Tianguis de Tonalá", details: "Estacionamiento", cost: 30, category: "transporte", location: "https://maps.google.com/?q=Tianguis+Tonala+Jalisco" },
+                        { id: 3, time: "09:00", activity: "Compras artesanías", details: "Cerámica, vidrio", cost: 500, category: "entradas", location: "https://maps.google.com/?q=Tianguis+Tonala+Jalisco" },
+                        { id: 4, time: "12:00", activity: "SIESTA en auto", details: "Traslado a Acuario", cost: 0, category: "transporte", location: "" },
+                        { id: 5, time: "13:00", activity: "Comida food court", details: "Centro comercial", cost: 500, category: "alimentacion", location: "" },
+                        { id: 6, time: "14:00", activity: "Acuario Michin", details: "2 Adultos (Emilia gratis)", cost: 518, category: "entradas", location: "https://maps.google.com/?q=Acuario+Michin+Guadalajara" },
+                        { id: 7, time: "19:00", activity: "Cena + empacar Tapalpa", details: "-", cost: 400, category: "alimentacion", location: "" }
+                    ]
+                },
+                {
+                    id: 6,
+                    date: "Viernes 22 Mayo",
+                    title: "🏛️ Centro Histórico + Tapalpa",
+                    activities: [
+                        { id: 1, time: "08:00", activity: "Desayuno + check-out", details: "Dejar maletas", cost: 0, category: "alimentacion", location: "" },
+                        { id: 2, time: "09:00", activity: "Estacionamiento Centro", details: "-", cost: 50, category: "transporte", location: "https://maps.google.com/?q=Centro+Historico+Guadalajara" },
+                        { id: 3, time: "09:30", activity: "Catedral de Guadalajara", details: "Entrada gratis", cost: 0, category: "entradas", location: "https://maps.google.com/?q=Catedral+de+Guadalajara" },
+                        { id: 4, time: "10:15", activity: "Hospicio Cabañas", details: "2 Adultos", cost: 160, category: "entradas", location: "https://maps.google.com/?q=Hospicio+Cabañas+Guadalajara" },
+                        { id: 5, time: "11:30", activity: "Mercado San Juan de Dios", details: "Antojitos", cost: 150, category: "alimentacion", location: "https://maps.google.com/?q=Mercado+San+Juan+de+Dios+Guadalajara" },
+                        { id: 6, time: "12:00", activity: "Salida a Tapalpa", details: "Caseta $117", cost: 117, category: "transporte", location: "" },
+                        { id: 7, time: "14:30", activity: "Comida Los Equipales", details: "Tapalpa", cost: 700, category: "alimentacion", location: "https://maps.google.com/?q=Los+Equipales+Tapalpa" },
+                        { id: 8, time: "16:00", activity: "Check-in cabaña Tapalpa", details: "Monterra", cost: 2800, category: "hospedaje", location: "https://maps.google.com/?q=Cabañas+Monterra+Tapalpa" },
+                        { id: 9, time: "17:00", activity: "Paseo plaza principal", details: "Elotes, paletas", cost: 100, category: "alimentacion", location: "https://maps.google.com/?q=Plaza+Principal+Tapalpa" },
+                        { id: 10, time: "20:00", activity: "Cena en cabaña", details: "-", cost: 400, category: "alimentacion", location: "" }
+                    ]
+                },
+                {
+                    id: 7,
+                    date: "Sábado 23 Mayo",
+                    title: "🌲 Las Piedrotas + Regreso",
+                    activities: [
+                        { id: 1, time: "08:00", activity: "Desayuno", details: "-", cost: 300, category: "alimentacion", location: "" },
+                        { id: 2, time: "09:30", activity: "Check-out cabaña", details: "-", cost: 0, category: "hospedaje", location: "" },
+                        { id: 3, time: "10:00", activity: "Valle de los Enigmas", details: "Entrada por auto", cost: 50, category: "entradas", location: "https://maps.google.com/?q=Valle+de+los+Enigmas+Las+Piedrotas+Tapalpa" },
+                        { id: 4, time: "13:00", activity: "Comida despedida Tapalpa", details: "Borrego", cost: 700, category: "alimentacion", location: "https://maps.google.com/?q=Tapalpa+Jalisco+Restaurantes" },
+                        { id: 5, time: "15:00", activity: "Regreso a GDL", details: "Caseta $117", cost: 117, category: "transporte", location: "" },
+                        { id: 6, time: "17:30", activity: "Check-in hotel GDL", details: "Última noche", cost: 1800, category: "hospedaje", location: "https://maps.google.com/?q=Hampton+Inn+Guadalajara+Expo" },
+                        { id: 7, time: "19:00", activity: "Cena de cierre", details: "Restaurante especial", cost: 800, category: "alimentacion", location: "" }
+                    ]
+                },
+                {
+                    id: 8,
+                    date: "Domingo 24 Mayo",
+                    title: "✈️ Regreso a Casa",
+                    activities: [
+                        { id: 1, time: "07:00", activity: "Desayuno", details: "-", cost: 0, category: "alimentacion", location: "" },
+                        { id: 2, time: "08:00", activity: "Check-out hotel", details: "-", cost: 0, category: "hospedaje", location: "" },
+                        { id: 3, time: "08:30", activity: "Traslado aeropuerto", details: "30 min", cost: 0, category: "transporte", location: "" },
+                        { id: 4, time: "09:00", activity: "Devolver auto", details: "Tanque lleno", cost: 400, category: "transporte", location: "https://maps.google.com/?q=Aeropuerto+Internacional+de+Guadalajara" },
+                        { id: 5, time: "11:00", activity: "¡Vuelo de regreso!", details: "🎉", cost: 0, category: "transporte", location: "" }
+                    ]
+                }
+            ],
+            fixedCosts: {
+                rentaAuto: 7000,
+                gasolinaExtra: 1500
+            }
+        };
+
+        // Load data from localStorage or use default
+        let tripData = JSON.parse(localStorage.getItem('guadalajaraTrip')) || JSON.parse(JSON.stringify(defaultData));
+
+        // Render the entire app
+        function render() {
+            const container = document.getElementById('days-container');
+            container.innerHTML = '';
+
+            tripData.days.forEach((day, dayIndex) => {
+                const dayCard = document.createElement('div');
+                dayCard.className = 'day-card';
+                dayCard.draggable = true;
+                dayCard.dataset.dayIndex = dayIndex;
+
+                const dayCost = day.activities.reduce((sum, act) => sum + (parseFloat(act.cost) || 0), 0);
+
+                dayCard.innerHTML = `
+            <div class="day-header" draggable="true" ondragstart="dragDay(event, ${dayIndex})" ondragover="allowDrop(event)" ondrop="dropDay(event, ${dayIndex})">
+                <div class="day-title">
+                    <span class="drag-handle">⠿</span>
+                    <input type="text" value="${day.title}" onchange="updateDayTitle(${dayIndex}, this.value)" class="editable-input">
+                </div>
+                <span class="day-date">${day.date}</span>
+                <span class="day-cost">$${dayCost.toLocaleString()}</span>
+            </div>
+            <table class="activities-table">
+                <thead>
+                    <tr>
+                        <th style="width: 30px;"></th>
+                        <th style="width: 80px;">Hora</th>
+                        <th>Actividad</th>
+                        <th>Detalles</th>
+                        <th style="width: 100px;">Categoría</th>
+                        <th style="width: 100px;">Costo</th>
+                        <th style="width: 40px;">📍</th>
+                        <th style="width: 40px;"></th>
+                    </tr>
+                </thead>
+                <tbody id="activities-${dayIndex}">
+                    ${day.activities.map((act, actIndex) => `
+                        <tr class="activity-row" draggable="true" ondragstart="dragActivity(event, ${dayIndex}, ${actIndex})" ondragover="allowDrop(event)" ondrop="dropActivity(event, ${dayIndex}, ${actIndex})">
+                            <td><span class="drag-handle">⠿</span></td>
+                            <td><input type="text" class="editable-input time-input" value="${act.time}" onchange="updateActivity(${dayIndex}, ${actIndex}, 'time', this.value)"></td>
+                            <td><input type="text" class="editable-input" value="${act.activity}" onchange="updateActivity(${dayIndex}, ${actIndex}, 'activity', this.value)"></td>
+                            <td><input type="text" class="editable-input" value="${act.details}" onchange="updateActivity(${dayIndex}, ${actIndex}, 'details', this.value)"></td>
+                            <td>
+                                <select class="editable-input" onchange="updateActivity(${dayIndex}, ${actIndex}, 'category', this.value)">
+                                    <option value="hospedaje" ${act.category === 'hospedaje' ? 'selected' : ''}>🏨 Hospedaje</option>
+                                    <option value="transporte" ${act.category === 'transporte' ? 'selected' : ''}>🚗 Transporte</option>
+                                    <option value="entradas" ${act.category === 'entradas' ? 'selected' : ''}>🎟️ Entradas</option>
+                                    <option value="alimentacion" ${act.category === 'alimentacion' ? 'selected' : ''}>🍽️ Comida</option>
+                                </select>
+                            </td>
+                            <td><input type="number" class="editable-input cost-input" value="${act.cost}" onchange="updateActivity(${dayIndex}, ${actIndex}, 'cost', parseFloat(this.value) || 0)"></td>
+                            <td>
+                                ${act.location ? `<a href="${act.location}" target="_blank" class="action-btn" style="background: #e3f2fd; color: #1976d2; text-decoration: none; display: inline-block;" title="Ver en Google Maps">📍</a>` : `<button class="action-btn" style="opacity: 0.3;" onclick="addLocation(${dayIndex}, ${actIndex})" title="Agregar ubicación">📍</button>`}
+                            </td>
+                            <td><button class="action-btn delete-btn" onclick="deleteActivity(${dayIndex}, ${actIndex})">🗑️</button></td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+            <button class="add-btn" onclick="addActivity(${dayIndex})">➕ Agregar Actividad</button>
+        `;
+
+                container.appendChild(dayCard);
+            });
+
+            updateBudget();
+        }
+
+        // Update budget calculations
+        function updateBudget() {
+            let hospedaje = 0, transporte = tripData.fixedCosts.rentaAuto + tripData.fixedCosts.gasolinaExtra, entradas = 0, alimentacion = 0;
+
+            tripData.days.forEach(day => {
+                day.activities.forEach(act => {
+                    const cost = parseFloat(act.cost) || 0;
+                    switch (act.category) {
+                        case 'hospedaje': hospedaje += cost; break;
+                        case 'transporte': transporte += cost; break;
+                        case 'entradas': entradas += cost; break;
+                        case 'alimentacion': alimentacion += cost; break;
+                    }
+                });
+            });
+
+            const grandTotal = hospedaje + transporte + entradas + alimentacion;
+
+            document.getElementById('budget-hospedaje').textContent = '$' + hospedaje.toLocaleString();
+            document.getElementById('budget-transporte').textContent = '$' + transporte.toLocaleString();
+            document.getElementById('budget-entradas').textContent = '$' + entradas.toLocaleString();
+            document.getElementById('budget-alimentacion').textContent = '$' + alimentacion.toLocaleString();
+            document.getElementById('budget-total').textContent = '$' + grandTotal.toLocaleString();
+
+            // Update Summary Table
+            const summaryBody = document.getElementById('summary-body');
+            summaryBody.innerHTML = `
+                <tr>
+                    <td>🏨 <strong>Hospedaje</strong></td>
+                    <td>Hoteles en GDL (6 noches) + Cabaña Tapalpa (1 noche)</td>
+                    <td style="text-align: right; font-weight: 600; color: #1e3c72;">$${hospedaje.toLocaleString()}</td>
+                </tr>
+                <tr>
+                    <td>🚗 <strong>Transporte</strong></td>
+                    <td>Renta de auto ($${tripData.fixedCosts.rentaAuto.toLocaleString()}) + Gasolina + Casetas</td>
+                    <td style="text-align: right; font-weight: 600; color: #1e3c72;">$${transporte.toLocaleString()}</td>
+                </tr>
+                <tr>
+                    <td>🎟️ <strong>Entradas</strong></td>
+                    <td>Zoológico, Acuario, JAPI, Hospicio Cabañas, etc.</td>
+                    <td style="text-align: right; font-weight: 600; color: #1e3c72;">$${entradas.toLocaleString()}</td>
+                </tr>
+                <tr>
+                    <td>🍽️ <strong>Alimentación</strong></td>
+                    <td>Comidas, cenas, snacks y bebidas</td>
+                    <td style="text-align: right; font-weight: 600; color: #1e3c72;">$${alimentacion.toLocaleString()}</td>
+                </tr>
+            `;
+
+            document.getElementById('summary-grand-total').textContent = '$' + grandTotal.toLocaleString();
+
+            // Update Daily Breakdown Table
+            const dailyBody = document.getElementById('daily-breakdown-body');
+            dailyBody.innerHTML = tripData.days.map(day => {
+                const dayCost = day.activities.reduce((sum, act) => sum + (parseFloat(act.cost) || 0), 0);
+                return `
+                    <tr>
+                        <td><strong>${day.date}</strong></td>
+                        <td>${day.title}</td>
+                        <td style="text-align: right; font-weight: 600; color: #28a745;">$${dayCost.toLocaleString()}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Update functions
+        function updateDayTitle(dayIndex, value) {
+            tripData.days[dayIndex].title = value;
+            saveData();
+        }
+
+        function updateActivity(dayIndex, actIndex, field, value) {
+            tripData.days[dayIndex].activities[actIndex][field] = value;
+            if (field === 'cost') {
+                render();
+            }
+            saveData();
+        }
+
+        function addActivity(dayIndex) {
+            const newId = Math.max(...tripData.days[dayIndex].activities.map(a => a.id), 0) + 1;
+            tripData.days[dayIndex].activities.push({
+                id: newId,
+                time: "00:00",
+                activity: "Nueva actividad",
+                details: "-",
+                cost: 0,
+                category: "alimentacion",
+                location: ""
+            });
+            render();
+            saveData();
+        }
+
+        function addLocation(dayIndex, actIndex) {
+            const actName = tripData.days[dayIndex].activities[actIndex].activity;
+            const url = prompt(`Ingresa el link de Google Maps para "${actName}":\n\n(Tip: Busca el lugar en Google Maps, copia la URL y pégala aquí)`);
+            if (url && url.trim()) {
+                tripData.days[dayIndex].activities[actIndex].location = url.trim();
+                render();
+                saveData();
+                showToast('Ubicación agregada');
+            }
+        }
+
+        function deleteActivity(dayIndex, actIndex) {
+            if (confirm('¿Eliminar esta actividad?')) {
+                tripData.days[dayIndex].activities.splice(actIndex, 1);
+                render();
+                saveData();
+            }
+        }
+
+        function addDay() {
+            const newId = Math.max(...tripData.days.map(d => d.id), 0) + 1;
+            tripData.days.push({
+                id: newId,
+                date: "Nuevo día",
+                title: "📅 Día Nuevo",
+                activities: [
+                    { id: 1, time: "09:00", activity: "Primera actividad", details: "-", cost: 0, category: "alimentacion" }
+                ]
+            });
+            render();
+            saveData();
+        }
+
+        // Drag and Drop for Days
+        let draggedDayIndex = null;
+        let draggedActivityData = null;
+
+        function dragDay(event, dayIndex) {
+            draggedDayIndex = dayIndex;
+            draggedActivityData = null;
+            event.dataTransfer.effectAllowed = 'move';
+            event.target.closest('.day-card').classList.add('dragging');
+        }
+
+        function dragActivity(event, dayIndex, actIndex) {
+            draggedActivityData = { dayIndex, actIndex };
+            draggedDayIndex = null;
+            event.dataTransfer.effectAllowed = 'move';
+            event.target.classList.add('dragging');
+            event.stopPropagation();
+        }
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function dropDay(event, targetDayIndex) {
+            event.preventDefault();
+            if (draggedDayIndex !== null && draggedDayIndex !== targetDayIndex) {
+                const [movedDay] = tripData.days.splice(draggedDayIndex, 1);
+                tripData.days.splice(targetDayIndex, 0, movedDay);
+                render();
+                saveData();
+                showToast('Día movido correctamente');
+            }
+            draggedDayIndex = null;
+        }
+
+        function dropActivity(event, targetDayIndex, targetActIndex) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (draggedActivityData !== null) {
+                const { dayIndex: sourceDayIndex, actIndex: sourceActIndex } = draggedActivityData;
+                const [movedActivity] = tripData.days[sourceDayIndex].activities.splice(sourceActIndex, 1);
+                tripData.days[targetDayIndex].activities.splice(targetActIndex, 0, movedActivity);
+                render();
+                saveData();
+                showToast('Actividad movida correctamente');
+            }
+            draggedActivityData = null;
+        }
+
+        // Save/Load functions
+        function saveData() {
+            localStorage.setItem('guadalajaraTrip', JSON.stringify(tripData));
+            updateBudget();
+        }
+
+        function resetData() {
+            if (confirm('¿Estás seguro? Esto eliminará todos los cambios y restaurará el itinerario original.')) {
+                tripData = JSON.parse(JSON.stringify(defaultData));
+                localStorage.removeItem('guadalajaraTrip');
+                render();
+                showToast('Itinerario restaurado');
+            }
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast show ' + type;
+            setTimeout(() => {
+                toast.className = 'toast';
+            }, 3000);
+        }
+
+        // Initialize
+        render();
+        showToast('¡Itinerario cargado! Puedes editar cualquier campo.');
+    </script>
+
+</body>
+
+</html>
