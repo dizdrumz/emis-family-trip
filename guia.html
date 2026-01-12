@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emi's Family Trip #2 - Guadalajara 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            font-size: 11pt;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 40px;
+        }
+
+        /* Cover Page */
+        .cover {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #e74c3c 100%);
+            color: white;
+            page-break-after: always;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cover h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42pt;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover .subtitle {
+            font-size: 18pt;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cover .dates {
+            font-size: 16pt;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .cover .family {
+            font-size: 14pt;
+            margin-top: 40px;
+        }
+
+        /* Headers */
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1e3c72;
+            font-size: 24pt;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #e74c3c;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2a5298;
+            font-size: 16pt;
+            margin: 25px 0 12px 0;
+            padding-left: 10px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #444;
+            font-size: 13pt;
+            margin: 20px 0 10px 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+
+        th {
+            background: #1e3c72;
+            color: white;
+            padding: 10px 8px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        tr:hover {
+            background: #e8f4f8;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: #e8f4f8;
+            border-left: 4px solid #2a5298;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tip-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .danger-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Day Cards */
+        .day-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            page-break-inside: avoid;
+        }
+
+        .day-header {
+            background: linear-gradient(90deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 12px 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14pt;
+        }
+
+        .day-content {
+            padding: 15px 20px;
+        }
+
+        /* Lists */
+        ul,
+        ol {
+            margin: 10px 0 10px 25px;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            padding: 5px 0 5px 30px;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 14pt;
+        }
+
+        /* Budget Summary */
+        .budget-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .budget-total {
+            font-size: 24pt;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* Page breaks */
+        .page-break {
+            page-break-after: always;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 9pt;
+            border-top: 1px solid #ddd;
+            margin-top: 40px;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                font-size: 10pt;
+            }
+
+            .container {
+                padding: 10px 20px;
+            }
+
+            .day-card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PORTADA -->
+    <div class="cover">
+        <h1>✨ Emi's Family Trip #2</h1>
+        <div class="subtitle">Guía Completa de Viaje en Familia a Guadalajara</div>
+        <div class="dates">📅 17 - 24 de Mayo, 2026</div>
+        <div class="family">
+            👨 Papá (43 años) &nbsp;|&nbsp; 👩 Mamá (33 años) &nbsp;|&nbsp; 👧 Emilia (2 años)
+        </div>
+        <p style="margin-top: 50px; font-size: 12pt; opacity: 0.8;">
+            7 días de aventura en la Perla Tapatía<br>
+            Itinerario optimizado para familias con bebé
+        </p>
+        <p style="margin-top: 20px; font-size: 10pt; opacity: 0.7;">
+            🌐 Versión interactiva: dizdrumz.github.io/emis-family-trip
+        </p>
+    </div>
+
+    <div class="container">
+
+        <!-- RESUMEN EJECUTIVO -->
+        <h1>📊 Resumen Ejecutivo</h1>
+
+        <div class="budget-summary">
+            <h3 style="color: white; border: none; margin: 0;">Presupuesto Total Estimado (Sin Vuelos)</h3>
+            <div class="budget-total">$34,000 - $47,000 MXN</div>
+        </div>
+
+        <table>
+            <tr>
+                <th>Concepto</th>
+                <th>Costo Estimado (MXN)</th>
+            </tr>
+            <tr>
+                <td><strong>Hospedaje</strong> (6 noches GDL + 1 Tapalpa)</td>
+                <td>$12,000 - $18,000</td>
+            </tr>
+            <tr>
+                <td><strong>Renta Auto SUV</strong> (7 días + silla bebé)</td>
+                <td>$7,000 - $9,500</td>
+            </tr>
+            <tr>
+                <td><strong>Gasolina + Casetas</strong></td>
+                <td>$2,500 - $3,000</td>
+            </tr>
+            <tr>
+                <td><strong>Entradas Atracciones</strong></td>
+                <td>$2,500 - $3,500</td>
+            </tr>
+            <tr>
+                <td><strong>Alimentación</strong> (7 días)</td>
+                <td>$7,000 - $10,000</td>
+            </tr>
+            <tr>
+                <td><strong>Imprevistos</strong> (10%)</td>
+                <td>$3,000</td>
+            </tr>
+        </table>
+
+        <div class="tip-box">
+            <strong>💡 Estrategia de Ahorro:</strong> Hospedarse en Airbnb con cocina puede reducir el gasto de
+            alimentación hasta 40%. Desayunar y cenar en casa, comer fuerte afuera.
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- ZONIFICACIÓN -->
+        <h1>🗺️ Zonificación Eficiente</h1>
+
+        <p>Las actividades están organizadas por <strong>zonas geográficas</strong> para minimizar traslados
+            innecesarios y aprovechar al máximo cada día.</p>
+
+        <h2>Zonas y Distancias desde Zona Expo (Base Recomendada)</h2>
+
+        <table>
+            <tr>
+                <th>Zona</th>
+                <th>Tiempo en Auto</th>
+                <th>Atracciones</th>
+            </tr>
+            <tr>
+                <td><strong>Sur/Expo (BASE)</strong></td>
+                <td>0 min</td>
+                <td>JAPI, Acuario Michin, Bosque Colomos, KidZania</td>
+            </tr>
+            <tr>
+                <td><strong>Norte (Huentitán)</strong></td>
+                <td>25-35 min</td>
+                <td>Zoológico Guadalajara, Planetario Lunaria</td>
+            </tr>
+            <tr>
+                <td><strong>Centro Histórico</strong></td>
+                <td>15-20 min</td>
+                <td>Catedral, Hospicio Cabañas, Mercado San Juan de Dios</td>
+            </tr>
+            <tr>
+                <td><strong>Este (Artesanías)</strong></td>
+                <td>20-30 min</td>
+                <td>Tonalá (Tianguis), Tlaquepaque</td>
+            </tr>
+            <tr>
+                <td><strong>Chapala/Ajijic</strong></td>
+                <td>45-60 min</td>
+                <td>Lago de Chapala, Malecón, Pueblo Mágico Ajijic</td>
+            </tr>
+            <tr>
+                <td><strong>Tapalpa</strong></td>
+                <td>2 horas</td>
+                <td>Pueblo Mágico, Valle de los Enigmas (Las Piedrotas)</td>
+            </tr>
+        </table>
+
+        <div class="info-box">
+            <strong>ℹ️ Lógica de la Zonificación:</strong> El hotel base está en zona Expo/Chapalita porque es el punto
+            central que minimiza los tiempos de traslado hacia todas las demás zonas, además de ser un área segura,
+            familiar y con todos los servicios.
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- HOSPEDAJE -->
+        <h1>🏨 Opciones de Hospedaje</h1>
+
+        <h2>En Guadalajara (6 Noches: Dom-Vie + Sáb)</h2>
+
+        <h3>Opción A: Hampton Inn by Hilton Guadalajara Expo ⭐⭐⭐</h3>
+        <ul>
+            <li><strong>Ubicación:</strong> Av. Mariano Otero 1390, Colonia Chapalita</li>
+            <li><strong>Por qué es ideal para familias:</strong>
+                <ul>
+                    <li>Desayuno buffet INCLUIDO (ahorro ~$400/día)</li>
+                    <li>Cunas GRATIS (solicitar al reservar)</li>
+                    <li>Estacionamiento GRATIS</li>
+                    <li>A 5 minutos de Expo, JAPI, Acuario Michin</li>
+                    <li>Niños menores de 12 años gratis en cama existente</li>
+                </ul>
+            </li>
+            <li><strong>Precio:</strong> $1,500 - $2,200 MXN/noche</li>
+            <li><strong>6 noches:</strong> $9,000 - $13,200 MXN</li>
+            <li><strong>Reservar:</strong> hilton.com o Booking.com</li>
+        </ul>
+
+        <h3>Opción B: Hotel Riu Plaza Guadalajara ⭐⭐⭐⭐⭐</h3>
+        <ul>
+            <li><strong>Precio:</strong> $2,800 - $3,500 MXN/noche</li>
+            <li><strong>Ventaja:</strong> Alberca climatizada, buffets de lujo</li>
+            <li><strong>Política niños:</strong> Gratis en cama existente</li>
+        </ul>
+
+        <h3>Opción C: Airbnb en Chapalita</h3>
+        <ul>
+            <li><strong>Ventajas:</strong> Cocina completa (ahorro en comidas), más espacio, jardín para que Emilia
+                corra</li>
+            <li><strong>Buscar:</strong> Filtrar por "Family-friendly" + "Cuna disponible" + "Estacionamiento"</li>
+            <li><strong>Precio estimado:</strong> $1,500 - $2,500 MXN/noche</li>
+        </ul>
+
+        <h2>En Tapalpa (1 Noche: Viernes)</h2>
+
+        <h3>Opción Recomendada: Cabañas Monterra</h3>
+        <ul>
+            <li><strong>Seguridad:</strong> Fraccionamiento cerrado con vigilancia 24 hrs</li>
+            <li><strong>Amenidades:</strong> Chimenea, calefacción, desayuno incluido</li>
+            <li><strong>Precio:</strong> $2,400 - $3,500 MXN (1 noche)</li>
+            <li><strong>Contacto:</strong> monterratapalpa.com | Tel: +52 343 432 0394</li>
+            <li><strong>Nota:</strong> Llamar para confirmar que aceptan 1 sola noche</li>
+        </ul>
+
+        <div class="page-break"></div>
+
+        <!-- TRANSPORTE -->
+        <h1>🚗 Estrategia de Transporte</h1>
+
+        <h2>Especificaciones del Vehículo</h2>
+        <ul>
+            <li><strong>Tipo requerido:</strong> SUV Mediana (Nissan X-Trail, KIA Sportage o similar)</li>
+            <li><strong>Justificación:</strong> Espacio para carreola + maletas, altura adecuada para curvas de montaña
+                hacia Tapalpa</li>
+        </ul>
+
+        <h2>Comparativa de Agencias en Aeropuerto GDL</h2>
+
+        <table>
+            <tr>
+                <th>Agencia</th>
+                <th>Precio/Semana*</th>
+                <th>Silla Bebé/Día</th>
+                <th>Seguro Incluido</th>
+            </tr>
+            <tr>
+                <td>Hertz</td>
+                <td>$6,500 - $8,000</td>
+                <td>$250</td>
+                <td>Básico</td>
+            </tr>
+            <tr>
+                <td>Alamo</td>
+                <td>$5,800 - $7,500</td>
+                <td>$200</td>
+                <td>Básico</td>
+            </tr>
+            <tr>
+                <td>National</td>
+                <td>$6,200 - $7,800</td>
+                <td>$220</td>
+                <td>Básico</td>
+            </tr>
+            <tr>
+                <td>Europcar</td>
+                <td>$5,500 - $7,000</td>
+                <td>$180</td>
+                <td>Básico</td>
+            </tr>
+        </table>
+        <p style="font-size: 9pt; color: #666;">*Precios estimados mayo 2026. Confirmar al reservar.</p>
+
+        <div class="danger-box">
+            <strong>⚠️ DECISIÓN CRÍTICA: Silla de Bebé</strong><br><br>
+            <strong>Costo de rentar silla 7 días:</strong> $1,260 - $1,750 MXN adicionales<br><br>
+            <strong>RECOMENDACIÓN:</strong> Documenten su propia silla en el avión (GRATIS en la mayoría de aerolíneas).
+            Se ahorran $1,500+ pesos y usan una silla que ya conocen y está limpia.
+        </div>
+
+        <h2>Casetas y Gasolina</h2>
+
+        <table>
+            <tr>
+                <th>Ruta</th>
+                <th>Caseta (Auto)</th>
+                <th>Distancia</th>
+                <th>Gasolina Aprox.*</th>
+            </tr>
+            <tr>
+                <td>GDL → Chapala</td>
+                <td>$94 MXN</td>
+                <td>50 km</td>
+                <td>$150</td>
+            </tr>
+            <tr>
+                <td>GDL → Tapalpa</td>
+                <td>$117 MXN</td>
+                <td>123 km</td>
+                <td>$350</td>
+            </tr>
+            <tr>
+                <td>GDL → Zoo (Huentitán)</td>
+                <td>$0</td>
+                <td>15 km</td>
+                <td>$50</td>
+            </tr>
+            <tr>
+                <td>GDL → Tonalá</td>
+                <td>$0</td>
+                <td>12 km</td>
+                <td>$40</td>
+            </tr>
+        </table>
+        <p style="font-size: 9pt; color: #666;">*Estimado con gasolina a ~$24/litro y SUV ~12 km/L</p>
+
+        <p><strong>Total Gasolina Semana:</strong> ~$1,500 - $2,000 MXN<br>
+            <strong>Total Casetas:</strong> ~$400 - $500 MXN (ida y vuelta a Chapala + Tapalpa)
+        </p>
+
+        <div class="page-break"></div>
+
+        <!-- ITINERARIO DÍA POR DÍA -->
+        <h1>📅 Itinerario Día por Día</h1>
+
+        <div class="info-box">
+            <strong>ℹ️ Estrategia de Siestas:</strong> Todo el itinerario está sincronizado para que Emilia duerma en el
+            auto durante los traslados largos (12:00 - 1:00 PM). Los días de actividad intensa tienen pausas
+            programadas.
+        </div>
+
+        <!-- DÍA 1 -->
+        <div class="day-card">
+            <div class="day-header">🛬 DOMINGO 17 MAYO: Llegada</div>
+            <div class="day-content">
+                <table>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Actividad</th>
+                        <th>Costo</th>
+                    </tr>
+                    <tr>
+                        <td>21:00</td>
+                        <td>Recoger auto en aeropuerto</td>
+                        <td>Incluido</td>
+                    </tr>
+                    <tr>
+                        <td>21:30</td>
+                        <td>Instalar silla de bebé</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>22:00</td>
+                        <td>Traslado a hotel/Airbnb (~30 min)</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>22:30</td>
+                        <td>Check-in, acomodar a Emilia</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>23:00</td>
+                        <td>Cena ligera (Uber Eats o OXXO)</td>
+                        <td>$200</td>
+                    </tr>
+                </table>
+                <p><strong>Costo del día:</strong> $200 MXN</p>
+            </div>
+        </div>
+
+        <!-- DÍA 2 -->
+        <div class="day-card">
+            <div class="day-header">🌊 LUNES 18 MAYO: Lago de Chapala + Ajijic</div>
+            <div class="day-content">
+                <p><em>Los museos cierran los lunes - día perfecto para excursión fuera de la ciudad</em></p>
+                <table>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Actividad</th>
+                        <th>Detalles</th>
+                        <th>Costo</th>
+                    </tr>
+                    <tr>
+                        <td>08:00</td>
+                        <td>Desayuno en hotel/casa</td>
+                        <td>-</td>
+                        <td>$0-200</td>
+                    </tr>
+                    <tr>
+                        <td>09:30</td>
+                        <td>Salida a Chapala</td>
+                        <td>Caseta $94</td>
+                        <td>$94</td>
+                    </tr>
+                    <tr>
+                        <td>10:30</td>
+                        <td>Llegada, paseo por Malecón Chapala</td>
+                        <td>Emilia ve el lago, lanchas</td>
+                        <td>Gratis</td>
+                    </tr>
+                    <tr>
+                        <td>12:00</td>
+                        <td><strong>SIESTA EN AUTO</strong> rumbo a Ajijic</td>
+                        <td>15 min de trayecto</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>12:30</td>
+                        <td>Llegada a Ajijic</td>
+                        <td>Estacionamiento $30</td>
+                        <td>$30</td>
+                    </tr>
+                    <tr>
+                        <td>13:00</td>
+                        <td>Comida en La Nueva Posada</td>
+                        <td>Jardín, tranquilo</td>
+                        <td>$800</td>
+                    </tr>
+                    <tr>
+                        <td>15:00</td>
+                        <td>Caminata por calles de Ajijic</td>
+                        <td>Murales, helado</td>
+                        <td>$100</td>
+                    </tr>
+                    <tr>
+                        <td>17:00</td>
+                        <td>Regreso a GDL</td>
+                        <td>Caseta $94</td>
+                        <td>$94</td>
+                    </tr>
+                    <tr>
+                        <td>20:00</td>
+                        <td>Cena ligera</td>
+                        <td>-</td>
+                        <td>$400</td>
+                    </tr>
+                </table>
+                <p><strong>Costo del día:</strong> ~$1,718 MXN</p>
+            </div>
+        </div>
+
+        <!-- DÍA 3 -->
+        <div class="day-card">
+            <div class="day-header">🦁 MARTES 19 MAYO: Zoológico + Planetario</div>
+            <div class="day-content">
+                <p><em>Zona Norte - dedicar día completo</em></p>
+                <table>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Actividad</th>
+                        <th>Detalles</th>
+                        <th>Costo</th>
+                    </tr>
+                    <tr>
+                        <td>08:00</td>
+                        <td>Desayuno hotel</td>
+                        <td>-</td>
+                        <td>$0-200</td>
+                    </tr>
+                    <tr>
+                        <td>09:00</td>
+                        <td>Salida al Zoológico</td>
+                        <td>30 min desde Expo</td>
+                        <td>Gasolina</td>
+                    </tr>
+                    <tr>
+                        <td>09:30</td>
+                        <td><strong>Zoológico Guadalajara</strong></td>
+                        <td>Estacionamiento $60</td>
+                        <td>$60</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Boletos Paquete Premier</td>
+                        <td>Adulto $390 x2 + Niño $270</td>
+                        <td>$780-1,050</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3"><em>Incluye: Safari Masai Mara, Acuario, Tren, Antártida</em></td>
+                    </tr>
+                    <tr>
+                        <td>12:00</td>
+                        <td><strong>SIESTA</strong></td>
+                        <td>Área de picnic o carreola</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>13:00</td>
+                        <td>Lunch dentro del Zoo</td>
+                        <td>Zona de comida</td>
+                        <td>$400</td>
+                    </tr>
+                    <tr>
+                        <td>16:00</td>
+                        <td>Salida → Planetario Lunaria</td>
+                        <td>10 min</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>16:30</td>
+                        <td><strong>Planetario Lunaria</strong></td>
+                        <td>Adulto $80 x2 / Niño $20</td>
+                        <td>$160-180</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3"><em>Nota: Edad mínima recomendada 3 años. Evaluar si Emilia disfruta</em></td>
+                    </tr>
+                    <tr>
+                        <td>18:00</td>
+                        <td>Regreso a hotel</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>20:00</td>
+                        <td>Cena en zona Providencia</td>
+                        <td>-</td>
+                        <td>$600</td>
+                    </tr>
+                </table>
+                <p><strong>Costo del día:</strong> ~$2,200 - $2,700 MXN</p>
+            </div>
+        </div>
+
+        <!-- DÍA 4 -->
+        <div class="day-card">
+            <div class="day-header">🎨 MIÉRCOLES 20 MAYO: JAPI + Bosque Colomos</div>
+            <div class="day-content">
+                <p><em>Zona Sur/Expo - cerca del hotel, día ligero</em></p>
+                <table>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Actividad</th>
+                        <th>Detalles</th>
+                        <th>Costo</th>
+                    </tr>
+                    <tr>
+                        <td>09:00</td>
+                        <td>Desayuno</td>
+                        <td>-</td>
+                        <td>$0-200</td>
+                    </tr>
+                    <tr>
+                        <td>10:00</td>
+                        <td><strong>JAPI (Jalisco Paseo Interactivo)</strong></td>
+                        <td>Estacionamiento $20/hr (máx $80)</td>
+                        <td>$80</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Entrada</td>
+                        <td>Adulto $150 x2 / Emilia GRATIS (&lt;2 años)</td>
+                        <td>$300</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3"><em>Experiencia: Tecnología inmersiva sobre Jalisco, pasillos amplios</em></td>
+                    </tr>
+                    <tr>
+                        <td>12:00</td>
+                        <td><strong>SIESTA</strong></td>
+                        <td>En auto o regresar a hotel (10 min)</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>13:30</td>
+                        <td>Comida en La Tequila (Chapalita)</td>
+                        <td>Amplio, familiar</td>
+                        <td>$900</td>
+                    </tr>
+                    <tr>
+                        <td>15:30</td>
+                        <td><strong>Bosque Los Colomos</strong></td>
+                        <td>Entrada GRATIS</td>
+                        <td>$0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3"><em>Actividades: Ver patos, ardillas, caminar senderos planos. Llevar
+                                cacahuates.</em></td>
+                    </tr>
+                    <tr>
+                        <td>18:00</td>
+                        <td>Regreso a hotel</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>20:00</td>
+                        <td>Cena</td>
+                        <td>-</td>
+                        <td>$400</td>
+                    </tr>
+                </table>
+                <p><strong>Costo del día:</strong> ~$1,880 MXN</p>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- DÍA 5 -->
+        <div class="day-card">
+            <div class="day-header">🐠 JUEVES 21 MAYO: Acuario Michin + Tonalá</div>
+            <div class="day-content">
+                <p><em>Jueves = Día de tianguis en Tonalá. Artesanías por la mañana, Acuario por la tarde.</em></p>
+                <table>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Actividad</th>
+                        <th>Detalles</th>
+                        <th>Costo</th>
+                    </tr>
+                    <tr>
+                        <td>08:00</td>
+                        <td>Desayuno temprano</td>
+                        <td>-</td>
+                        <td>$200</td>
+                    </tr>
+                    <tr>
+                        <td>09:00</td>
+                        <td><strong>Tianguis de Tonalá</strong></td>
+                        <td>Llegar temprano, hay gente</td>
+                        <td>Gasolina</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="2"><em>Tip: Carreola buena o portabebé ergonómico</em></td>
+                        <td>Est. $30</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Compras artesanías</td>
+                        <td>Cerámica, vidrio soplado</td>
+                        <td>$500</td>
+                    </tr>
+                    <tr>
+                        <td>11:30</td>
+                        <td>Traslado a zona Acuario</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>12:00</td>
+                        <td><strong>SIESTA en auto</strong></td>
+                        <td>Durante traslado</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>13:00</td>
+                        <td>Comida en food court</td>
+                        <td>Centro comercial del Acuario</td>
+                        <td>$500</td>
+                    </tr>
+                    <tr>
+                        <td>14:00</td>
+                        <td><strong>Acuario Michin</strong></td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Entrada</td>
+                        <td>Adulto $259 x2 / Emilia GRATIS (niños pagan desde 3 años)</td>
+                        <td>$518</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3"><em>🌟 Highlight: Granja Achibueno (tocar conejos, cabras). ¡Éxito seguro con
+                                Emilia!</em></td>
+                    </tr>
+                    <tr>
+                        <td>17:00</td>
+                        <td>Regreso a hotel</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>19:00</td>
+                        <td>Cena y empacar mochila Tapalpa</td>
+                        <td>-</td>
+                        <td>$400</td>
+                    </tr>
+                </table>
+                <p><strong>Costo del día:</strong> ~$2,148 MXN</p>
+            </div>
+        </div>
+
+        <!-- DÍA 6 -->
+        <div class="day-card">
+            <div class="day-header">🏛️ VIERNES 22 MAYO: Centro Histórico + Tapalpa</div>
+            <div class="day-content">
+                <p><em>Mañana cultural en el centro, tarde viaje a la montaña</em></p>
+                <table>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Actividad</th>
+                        <th>Detalles</th>
+                        <th>Costo</th>
+                    </tr>
+                    <tr>
+                        <td>08:00</td>
+                        <td>Desayuno, check-out parcial</td>
+                        <td>Dejar maletas en recepción</td>
+                        <td>$0</td>
+                    </tr>
+                    <tr>
+                        <td>09:00</td>
+                        <td>Traslado a Centro Histórico</td>
+                        <td>Estacionamiento ~$50</td>
+                        <td>$50</td>
+                    </tr>
+                    <tr>
+                        <td>09:30</td>
+                        <td><strong>Catedral de Guadalajara</strong></td>
+                        <td>Entrada GRATIS</td>
+                        <td>$0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3"><em>Paseo por Plaza de Armas y Rotonda de los Jaliscienses Ilustres</em></td>
+                    </tr>
+                    <tr>
+                        <td>10:15</td>
+                        <td><strong>Hospicio Cabañas</strong> (UNESCO)</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Entrada</td>
+                        <td>Adulto $80 x2 / Emilia GRATIS</td>
+                        <td>$160</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3"><em>Ver: Murales de Orozco. Los patios amplios son buenos para que Emilia
+                                camine.</em></td>
+                    </tr>
+                    <tr>
+                        <td>11:30</td>
+                        <td>Mercado San Juan de Dios</td>
+                        <td>Vuelta rápida, antojitos</td>
+                        <td>$150</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3"><em>⚠️ Puede ser abrumador (olores, ruido). Solo si Emilia está de buen
+                                humor.</em></td>
+                    </tr>
+                    <tr>
+                        <td>12:00</td>
+                        <td>🚗 <strong>Salida a TAPALPA</strong></td>
+                        <td>Caseta $117</td>
+                        <td>$117</td>
+                    </tr>
+                    <tr>
+                        <td>12:15</td>
+                        <td><strong>SIESTA EN AUTO</strong></td>
+                        <td>2 hrs de viaje - ¡Perfecto!</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>14:00</td>
+                        <td>Llegada a Tapalpa</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>14:30</td>
+                        <td>Comida en Los Equipales</td>
+                        <td>Entrada al pueblo</td>
+                        <td>$700</td>
+                    </tr>
+                    <tr>
+                        <td>16:00</td>
+                        <td>Check-in cabaña/hotel</td>
+                        <td>-</td>
+                        <td>$2,400-3,500</td>
+                    </tr>
+                    <tr>
+                        <td>17:00</td>
+                        <td>Paseo por plaza principal</td>
+                        <td>Elotes, paletas</td>
+                        <td>$100</td>
+                    </tr>
+                    <tr>
+                        <td>20:00</td>
+                        <td>Cena y descansar</td>
+                        <td>-</td>
+                        <td>$400</td>
+                    </tr>
+                </table>
+                <p><strong>Costo del día (con hospedaje):</strong> ~$4,077 - $5,177 MXN</p>
+            </div>
+        </div>
+
+        <!-- DÍA 7 -->
+        <div class="day-card">
+            <div class="day-header">🌲 SÁBADO 23 MAYO: Las Piedrotas + Regreso</div>
+            <div class="day-content">
+                <p><em>Mañana en el bosque, regreso a GDL con luz de día</em></p>
+                <table>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Actividad</th>
+                        <th>Detalles</th>
+                        <th>Costo</th>
+                    </tr>
+                    <tr>
+                        <td>08:00</td>
+                        <td>Desayuno en cabaña o plaza</td>
+                        <td>-</td>
+                        <td>$300</td>
+                    </tr>
+                    <tr>
+                        <td>09:30</td>
+                        <td>Check-out cabaña</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>10:00</td>
+                        <td><strong>Valle de los Enigmas (Las Piedrotas)</strong></td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Entrada</td>
+                        <td>~$50 por auto</td>
+                        <td>$50</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3"><em>🌟 Actividades: Correr en pasto gigante, fotos con rocas enormes, ver vacas.
+                                Paseo a caballo opcional ($150).</em></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3"><em>⚠️ Llevar bloqueador solar y sombrero</em></td>
+                    </tr>
+                    <tr>
+                        <td>13:00</td>
+                        <td>Comida de despedida en Tapalpa</td>
+                        <td>Borrego al pastor (especialidad)</td>
+                        <td>$700</td>
+                    </tr>
+                    <tr>
+                        <td>15:00</td>
+                        <td>🚗 <strong>Regreso a Guadalajara</strong></td>
+                        <td>Caseta $117</td>
+                        <td>$117</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3"><em>Importante: Manejar con luz de día por las curvas</em></td>
+                    </tr>
+                    <tr>
+                        <td>17:00</td>
+                        <td>Llegada a GDL</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>17:30</td>
+                        <td>Check-in hotel nuevamente</td>
+                        <td>-</td>
+                        <td>Noche 6</td>
+                    </tr>
+                    <tr>
+                        <td>19:00</td>
+                        <td>Cena de cierre (lugar especial)</td>
+                        <td>Celebrar el viaje</td>
+                        <td>$800</td>
+                    </tr>
+                    <tr>
+                        <td>21:00</td>
+                        <td>Empacar todo para mañana</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </table>
+                <p><strong>Costo del día:</strong> ~$2,117 MXN</p>
+            </div>
+        </div>
+
+        <!-- DÍA 8 -->
+        <div class="day-card">
+            <div class="day-header">✈️ DOMINGO 24 MAYO: Regreso a Casa</div>
+            <div class="day-content">
+                <table>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Actividad</th>
+                        <th>Detalles</th>
+                        <th>Costo</th>
+                    </tr>
+                    <tr>
+                        <td>07:00</td>
+                        <td>Despertar, desayunar</td>
+                        <td>-</td>
+                        <td>$0-200</td>
+                    </tr>
+                    <tr>
+                        <td>08:00</td>
+                        <td>Check-out hotel</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>08:30</td>
+                        <td>Traslado al Aeropuerto</td>
+                        <td>30 min desde Chapalita</td>
+                        <td>Gasolina</td>
+                    </tr>
+                    <tr>
+                        <td>09:00</td>
+                        <td>Devolver auto en aeropuerto</td>
+                        <td>Revisar contrato, tanque lleno</td>
+                        <td>$400</td>
+                    </tr>
+                    <tr>
+                        <td>09:30</td>
+                        <td>Check-in vuelo</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>11:00+</td>
+                        <td>¡Vuelo de regreso!</td>
+                        <td>🎉</td>
+                        <td>-</td>
+                    </tr>
+                </table>
+                <p><strong>Costo del día:</strong> ~$600 MXN</p>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- LUGARES OMITIDOS -->
+        <h1>❌ Lugares Omitidos y Por Qué</h1>
+
+        <table>
+            <tr>
+                <th>Lugar</th>
+                <th>Razón de Omisión</th>
+                <th>Alternativa</th>
+            </tr>
+            <tr>
+                <td><strong>KidZania</strong></td>
+                <td>A los 2 años, Emilia no aprovecha las actividades de rol (ideales desde 4+ años). Las actividades
+                    duran 15-25 min y requieren comprensión de roles.</td>
+                <td>Acuario Michin tiene granja de contacto que es perfecta para su edad</td>
+            </tr>
+            <tr>
+                <td><strong>Plaza del Mariachi</strong></td>
+                <td>Reportes recientes (2025) indican abandono, falta de seguridad y pocos mariachis. No recomendada
+                    para familias con niños pequeños.</td>
+                <td>Escuchar mariachis en restaurante de Tlaquepaque (El Parián) o contratar para hotel</td>
+            </tr>
+            <tr>
+                <td><strong>Bosque de la Primavera</strong></td>
+                <td>Los senderos fáciles requieren caminatas de 6+ km. Con carreola y bebé de 2 años es difícil y poco
+                    práctico.</td>
+                <td>Bosque Colomos (senderos cortos, pavimentados, con patos y ardillas)</td>
+            </tr>
+            <tr>
+                <td><strong>Tlaquepaque</strong> (día completo)</td>
+                <td>Tonalá cubre la experiencia artesanal. Tlaquepaque es más caro y menos "auténtico" para compras.
+                </td>
+                <td>Si sobra tiempo el jueves, agregar 2 hrs después del Acuario</td>
+            </tr>
+        </table>
+
+        <div class="page-break"></div>
+
+        <!-- CHECKLIST -->
+        <h1>🎒 Checklist de Viaje</h1>
+
+        <h2>Para Emilia (2 años)</h2>
+        <ul class="checklist">
+            <li>Pijama térmica (Tapalpa baja a 5-10°C en la noche)</li>
+            <li>Chamarra gruesa para montaña</li>
+            <li>2-3 mudas de ropa diaria</li>
+            <li>Pañales suficientes (en Tapalpa las farmacias son limitadas)</li>
+            <li>Tempra/Paracetamol infantil</li>
+            <li>Suero oral (por si acaso)</li>
+            <li>Curitas y antiséptico</li>
+            <li>Bloqueador solar para niños</li>
+            <li>Gorra o sombrero</li>
+            <li>Snacks favoritos (para siesta en auto)</li>
+            <li>Tablet con episodios descargados offline (Bluey, La Granja de Zenón)</li>
+            <li>Audífonos infantiles</li>
+            <li>Libro o juguete pequeño favorito</li>
+            <li>Cobijita para siesta</li>
+        </ul>
+
+        <h2>Para el Auto</h2>
+        <ul class="checklist">
+            <li>Silla de bebé (propia o rentada)</li>
+            <li>Parasol para ventanas traseras</li>
+            <li>Bolsas para basura</li>
+            <li>Toallitas húmedas (accesibles)</li>
+            <li>Agua embotellada</li>
+            <li>Cargador de celular para auto</li>
+        </ul>
+
+        <h2>Documentos</h2>
+        <ul class="checklist">
+            <li>INE/Pasaportes de todos</li>
+            <li>Licencia de conducir vigente</li>
+            <li>Tarjeta de crédito (para renta de auto)</li>
+            <li>Confirmación de reservas (hotel/Airbnb)</li>
+            <li>Seguro de gastos médicos (opcional pero recomendado)</li>
+            <li>Efectivo ($3,000 MXN mínimo para lugares sin terminal)</li>
+        </ul>
+
+        <div class="page-break"></div>
+
+        <!-- CONTACTOS -->
+        <h1>📞 Contactos Útiles</h1>
+
+        <table>
+            <tr>
+                <th>Servicio</th>
+                <th>Teléfono</th>
+                <th>Notas</th>
+            </tr>
+            <tr>
+                <td>Emergencias</td>
+                <td><strong>911</strong></td>
+                <td>Nacional</td>
+            </tr>
+            <tr>
+                <td>Hospital Ángeles GDL</td>
+                <td>+52 33 3813 0042</td>
+                <td>Zona Expo, recomendado</td>
+            </tr>
+            <tr>
+                <td>Zoológico Guadalajara</td>
+                <td>+52 33 3674 4488</td>
+                <td>Confirmar horarios</td>
+            </tr>
+            <tr>
+                <td>Acuario Michin</td>
+                <td>+52 33 3880 8000</td>
+                <td>Confirmar horarios</td>
+            </tr>
+            <tr>
+                <td>JAPI</td>
+                <td>+52 33 3030 2020</td>
+                <td>Confirmar horarios</td>
+            </tr>
+            <tr>
+                <td>Monterra Tapalpa</td>
+                <td>+52 343 432 0394</td>
+                <td>Reservar cabaña</td>
+            </tr>
+            <tr>
+                <td>Hampton Inn Expo</td>
+                <td>+52 33 3880 0000</td>
+                <td>Hotel recomendado</td>
+            </tr>
+        </table>
+
+        <!-- TIPS FINALES -->
+        <h1>💡 Tips Finales</h1>
+
+        <div class="tip-box">
+            <strong>1. Mayo = Calor en GDL (30°C+)</strong><br>
+            Hidratarse constantemente, buscar sombra, vestir ropa ligera y transpirable.
+        </div>
+
+        <div class="info-box">
+            <strong>2. Tapalpa = Fresco (10-18°C)</strong><br>
+            Llevar capas. En la noche baja considerablemente la temperatura.
+        </div>
+
+        <div class="warning-box">
+            <strong>3. La Siesta es Sagrada</strong><br>
+            Todo el itinerario está diseñado para que Emilia duerma en auto durante traslados largos (12-1 PM). No
+            cambiar los horarios drásticamente.
+        </div>
+
+        <div class="tip-box">
+            <strong>4. Navegación: Waze > Google Maps</strong><br>
+            Waze reporta mejor el tráfico en tiempo real en Guadalajara.
+        </div>
+
+        <div class="info-box">
+            <strong>5. Propinas</strong><br>
+            10-15% en restaurantes, $20-50 a cuidacoches (viene y te indica dónde estacionarte).
+        </div>
+
+        <div class="danger-box">
+            <strong>6. Agua: SIEMPRE embotellada</strong><br>
+            No beber agua del grifo ni pedir bebidas con hielo en lugares dudosos.
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- ENLACES DE GOOGLE MAPS -->
+        <h1>📍 Enlaces de Google Maps</h1>
+
+        <p>Escanea los códigos QR o visita los enlaces para navegar directamente a cada ubicación:</p>
+
+        <h2>Hospedaje</h2>
+        <table>
+            <tr>
+                <th>Lugar</th>
+                <th>Enlace</th>
+            </tr>
+            <tr>
+                <td>Hampton Inn Guadalajara Expo</td>
+                <td><a href="https://maps.google.com/?q=Hampton+Inn+Guadalajara+Expo"
+                        target="_blank">maps.google.com/?q=Hampton+Inn+Guadalajara+Expo</a></td>
+            </tr>
+            <tr>
+                <td>Cabañas Monterra Tapalpa</td>
+                <td><a href="https://maps.google.com/?q=Cabañas+Monterra+Tapalpa"
+                        target="_blank">maps.google.com/?q=Cabañas+Monterra+Tapalpa</a></td>
+            </tr>
+        </table>
+
+        <h2>Atracciones Principales</h2>
+        <table>
+            <tr>
+                <th>Lugar</th>
+                <th>Enlace</th>
+            </tr>
+            <tr>
+                <td>Aeropuerto Internacional de Guadalajara</td>
+                <td><a href="https://maps.google.com/?q=Aeropuerto+Internacional+de+Guadalajara"
+                        target="_blank">maps.google.com/?q=Aeropuerto+Internacional+de+Guadalajara</a></td>
+            </tr>
+            <tr>
+                <td>Malecón Chapala</td>
+                <td><a href="https://maps.google.com/?q=Malecon+Chapala+Jalisco"
+                        target="_blank">maps.google.com/?q=Malecon+Chapala+Jalisco</a></td>
+            </tr>
+            <tr>
+                <td>Malecón Ajijic</td>
+                <td><a href="https://maps.google.com/?q=Malecon+Ajijic+Jalisco"
+                        target="_blank">maps.google.com/?q=Malecon+Ajijic+Jalisco</a></td>
+            </tr>
+            <tr>
+                <td>Restaurante La Nueva Posada (Ajijic)</td>
+                <td><a href="https://maps.google.com/?q=La+Nueva+Posada+Ajijic"
+                        target="_blank">maps.google.com/?q=La+Nueva+Posada+Ajijic</a></td>
+            </tr>
+            <tr>
+                <td>Zoológico de Guadalajara</td>
+                <td><a href="https://maps.google.com/?q=Zoologico+Guadalajara"
+                        target="_blank">maps.google.com/?q=Zoologico+Guadalajara</a></td>
+            </tr>
+            <tr>
+                <td>Planetario Lunaria</td>
+                <td><a href="https://maps.google.com/?q=Planetario+Lunaria+Guadalajara"
+                        target="_blank">maps.google.com/?q=Planetario+Lunaria+Guadalajara</a></td>
+            </tr>
+            <tr>
+                <td>JAPI (Jalisco Paseo Interactivo)</td>
+                <td><a href="https://maps.google.com/?q=JAPI+Jalisco+Paseo+Interactivo"
+                        target="_blank">maps.google.com/?q=JAPI+Jalisco+Paseo+Interactivo</a></td>
+            </tr>
+            <tr>
+                <td>Bosque Los Colomos</td>
+                <td><a href="https://maps.google.com/?q=Bosque+Los+Colomos+Guadalajara"
+                        target="_blank">maps.google.com/?q=Bosque+Los+Colomos+Guadalajara</a></td>
+            </tr>
+            <tr>
+                <td>Restaurante La Tequila (Chapalita)</td>
+                <td><a href="https://maps.google.com/?q=La+Tequila+Chapalita+Guadalajara"
+                        target="_blank">maps.google.com/?q=La+Tequila+Chapalita+Guadalajara</a></td>
+            </tr>
+            <tr>
+                <td>Tianguis de Tonalá</td>
+                <td><a href="https://maps.google.com/?q=Tianguis+Tonala+Jalisco"
+                        target="_blank">maps.google.com/?q=Tianguis+Tonala+Jalisco</a></td>
+            </tr>
+            <tr>
+                <td>Acuario Michin Guadalajara</td>
+                <td><a href="https://maps.google.com/?q=Acuario+Michin+Guadalajara"
+                        target="_blank">maps.google.com/?q=Acuario+Michin+Guadalajara</a></td>
+            </tr>
+            <tr>
+                <td>Catedral de Guadalajara</td>
+                <td><a href="https://maps.google.com/?q=Catedral+de+Guadalajara"
+                        target="_blank">maps.google.com/?q=Catedral+de+Guadalajara</a></td>
+            </tr>
+            <tr>
+                <td>Hospicio Cabañas</td>
+                <td><a href="https://maps.google.com/?q=Hospicio+Cabañas+Guadalajara"
+                        target="_blank">maps.google.com/?q=Hospicio+Cabañas+Guadalajara</a></td>
+            </tr>
+            <tr>
+                <td>Mercado San Juan de Dios</td>
+                <td><a href="https://maps.google.com/?q=Mercado+San+Juan+de+Dios+Guadalajara"
+                        target="_blank">maps.google.com/?q=Mercado+San+Juan+de+Dios+Guadalajara</a></td>
+            </tr>
+            <tr>
+                <td>Plaza Principal de Tapalpa</td>
+                <td><a href="https://maps.google.com/?q=Plaza+Principal+Tapalpa"
+                        target="_blank">maps.google.com/?q=Plaza+Principal+Tapalpa</a></td>
+            </tr>
+            <tr>
+                <td>Valle de los Enigmas (Las Piedrotas)</td>
+                <td><a href="https://maps.google.com/?q=Valle+de+los+Enigmas+Las+Piedrotas+Tapalpa"
+                        target="_blank">maps.google.com/?q=Valle+de+los+Enigmas+Las+Piedrotas+Tapalpa</a></td>
+            </tr>
+        </table>
+
+        <div class="tip-box">
+            <strong>💡 Tip de Navegación:</strong> Usa <strong>Waze</strong> para tráfico en tiempo real en Guadalajara.
+            Google Maps es mejor para rutas hacia Tapalpa y Chapala.
+        </div>
+
+        <div class="info-box">
+            <strong>🌐 Versión Interactiva Online:</strong><br>
+            Puedes acceder al planificador editable en cualquier dispositivo en:<br>
+            <strong>dizdrumz.github.io/emis-family-trip</strong>
+        </div>
+
+        <div class="footer">
+            <p>✨ Emi's Family Trip #2 - Guadalajara 2026</p>
+            <p>Elaborado con ❤️ para la Familia</p>
+            <p style="margin-top: 10px;">Para imprimir: Archivo → Imprimir → Guardar como PDF</p>
+        </div>
+
+    </div>
+</body>
+
+</html>
